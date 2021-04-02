@@ -1,1 +1,20 @@
-soonTM
+<script src="/assets/js/notiflix-2.7.0.min.js"></script>
+<link rel="stylesheet" href="/assets/css/notiflix-2.7.0.min.css">
+
+<script>
+    Notiflix.Notify.Init({
+        position: 'right-bottom'
+    });
+</script>
+
+
+
+<%   if (message != "") { %>
+    <script>
+        if ("<%= messageType %>" == "success") {
+            Notiflix.Notify.Success('<%= message %>');
+        } else if ("<%= messageType %>" == "error") {
+            Notiflix.Notify.Failure('<%= message %>');
+        }
+    </script>
+    <% }%>
