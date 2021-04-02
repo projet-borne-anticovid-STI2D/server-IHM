@@ -10,7 +10,35 @@ const morgan = require("morgan");
 
 const LocalStrategy = require("passport-local").Strategy;
 
+const db = require("./database");
+const SelfReloadJSON = require("self-reload-json");
+const adminPassword = new SelfReloadJSON("./password.json");
+
 async function init() {
+  // database init
+  // prepare database
+  let startTime = Date.now();
+  await db.sequelize
+    .sync({
+      alter: true,
+      logging: false,
+    })
+    .then(() => {
+      finishTime = Date.now();
+      console.log(
+        "[" +
+          "LOADING".green +
+          "]" +
+          "[" +
+          "MYSQL".yellow +
+          "] " +
+          "Database loaded in " +
+          (finishTime - startTime) +
+          "ms"
+      );
+    });
+
+  // webserver init
   const app = express();
   const http = require("http").createServer(app);
   const config = require("./config");
@@ -23,16 +51,23 @@ async function init() {
   app.set("view engine", "ejs");
 
   if (config.debug) {
-    app.use(morgan("[" + "DEBUG".magenta + "] " + "[" + "REQUEST".green + "] " + ":method :url :status :res[content-length] - :response-time ms"));
+    app.use(
+      morgan(
+        "[" +
+          "DEBUG".magenta +
+          "] " +
+          "[" +
+          "REQUEST".green +
+          "] " +
+          ":method :url :status :res[content-length] - :response-time ms"
+      )
+    );
   }
 
   // load our routes
   app.use("/", require("./routes/index"));
 
-
-
   // passportjs stuffs
-/*
 
   passport.serializeUser(function (user, done) {
     if (debug)
@@ -44,7 +79,7 @@ async function init() {
 
   passport.deserializeUser(function (testuser, done) {
     let user = {
-      username: "user", 
+      username: "user",
       passwordHash: config.passwordHash,
       id: 1,
     };
@@ -62,17 +97,6 @@ async function init() {
       done("cc", user);
     }
   });
-
-
-
-
-
-*/
-
-
-
-
-
 
   // log informatif de démarrage terminé
   http.listen(config.port, () => {
