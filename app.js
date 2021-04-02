@@ -26,6 +26,54 @@ async function init() {
     app.use(morgan("[" + "DEBUG".magenta + "] " + "[" + "REQUEST".green + "] " + ":method :url :status :res[content-length] - :response-time ms"));
   }
 
+  // load our routes
+  app.use("/", require("./routes/index"));
+
+
+
+  // passportjs stuffs
+/*
+
+  passport.serializeUser(function (user, done) {
+    if (debug)
+      utils.logDebug(
+        "[" + "AUTH".red + "] " + "sérialise l'user " + user.username
+      );
+    done(null, user);
+  });
+
+  passport.deserializeUser(function (testuser, done) {
+    let user = {
+      username: "user", 
+      passwordHash: config.passwordHash,
+      id: 1,
+    };
+
+    if (debug)
+      utils.logDebug(
+        "[" + "AUTH".red + "] " + "désérialise l'user " + testuser.username
+      );
+
+    if (user.username == testuser.username) {
+      done(null, user);
+    } else {
+      if (debug)
+        utils.logDebug("[" + "AUTH".red + "] " + "décé user pas trouvé");
+      done("cc", user);
+    }
+  });
+
+
+
+
+
+*/
+
+
+
+
+
+
   // log informatif de démarrage terminé
   http.listen(config.port, () => {
     console.log("[STARTING] App started on port ".brightCyan + config.port);
