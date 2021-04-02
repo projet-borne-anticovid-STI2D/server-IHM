@@ -68,7 +68,57 @@ async function init() {
   app.use("/", require("./routes/index"));
 
   // passportjs stuffs
+  passport.use(
+    new LocalStrategy(function (username, password, done) {
+      let user = {
+        username: "user",
+        passwordHash: config.passwordHash,
+        id: 1,
+      };
 
+      if (debug)
+        utils.logDebug("[" + "AUTH".red + "] " + "je cherche " + username);
+      if (user.username == "user") {
+        if (debug)
+          utils.logDebug(
+            "[" + "AUTH".red + "] " + "User trouvé: " + user.toString
+          );
+        // User not found
+        if (!user) {
+          if (debug)
+            utils.logDebug(
+              "[" + "AUTH".red + "] " + "je ne trouve pas " + user
+            );
+          return done(null, false);
+        }
+
+        // Always use hashed passwords and fixed time comparison
+        bcrypt.compare(password, user.passwordHash, (err, isValid) => {
+          if (err) {
+            return done(err);
+          }
+          if (!isValid) {
+            if (debug)
+              utils.logDebug(
+                "[" + "AUTH".red + "] " + "mdp de " + user.username + " faux"
+              );
+            return done(null, false), { message: "Incorrect password." };
+          }
+          if (debug)
+            utils.logDebug(
+              "[" + "AUTH".red + "] " + "mdp de " + user.username + " validé"
+            );
+          return done(null, user);
+        });
+      } else {
+        if (debug)
+          utils.logDebug(
+            "[" + "AUTH".red + "] " + "Je ne trouve pas " + username
+          );
+        return done("user not found");
+      }
+    })
+  );
   passport.serializeUser(function (user, done) {
     if (debug)
       utils.logDebug(

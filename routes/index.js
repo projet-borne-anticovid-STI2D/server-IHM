@@ -4,7 +4,9 @@ const router = express.Router();
 const config = require("../config.js");
 const checkAuth = require("../modules/auth/checkAuth.js");
 const debug = config.debug;
-const adminPassword = new SelfReloadJSON("../password.json");
+
+const SelfReloadJSON = require("self-reload-json");
+const adminPassword = new SelfReloadJSON("./password.json");
 
 // pour ne pas afficher une page vide moche
 router.get("/", checkAuth, function (req, res) {
@@ -29,7 +31,7 @@ router.post("/login", function (req, res) {
   res.render("login.ejs", {});
 });
 
-app.post("/login", function (req, res, next) {
+router.post("/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
     if (err) {
       return next(err);
