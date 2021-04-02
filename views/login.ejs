@@ -1,18 +1,56 @@
-<form action="/login" method="post">
+  <!DOCTYPE html>
+  <html lang="fr">
+    <head>
+      <title>Titre de page</title>
+      <%- include('partials/head'); %>
+    </head>
+  <body>
+      <%- include('partials/headbar'); %>
+    
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+          </div>
+          <div class="col-sm">
+            <div class="login-box">
 
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" required>
-  
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required>
-  
-      <button type="submit">Login</button>
-  
-    </div>
-  
+              <form action="/login" method="post">
+
+                <div class="container">
+                  <label for="uname"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="username" required>
+              
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="password" required>
+              
+                  <button type="submit">Login</button>
+              
+                </div>
+              
+              
+              
+              </form>
+            </div>
+          </div>
+          <div class="col-sm">
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
    
-  </form>
-
-
+  
+  
+  </body>
+  
+  
   <%- include('partials/bottom'); %>
+  </html>
