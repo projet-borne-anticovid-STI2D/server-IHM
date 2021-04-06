@@ -11,16 +11,13 @@ const adminPassword = new SelfReloadJSON("./password.json");
 
 // page d'acceuil du truc
 router.get("/", checkAuth, function (req, res) {
-  res.render("main.ejs", {
-    message: "",
-    messageType: "error",
-  });
+  res.redirect("/dashboard");
 });
 
 // page de login
 router.get("/login", function (req, res) {
   if (req.isAuthenticated()) {
-    return res.redirect("/");
+    return res.redirect("/dashboard");
   }
 
   res.render("login.ejs", {

@@ -71,6 +71,7 @@ async function init() {
 
   // load our routes
   app.use("/", require("./routes/index"));
+  app.use("/dashboard", require("./routes/dashboard"));
 
   // passportjs stuffs
   passport.use(
