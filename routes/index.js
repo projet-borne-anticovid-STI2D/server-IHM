@@ -23,12 +23,13 @@ router.get("/login", function (req, res) {
   res.render("login.ejs", {
     message: "",
     messageType: "error",
+    user: req.user,
   });
 });
 
 // réception des requetes de login
 router.post("/login", function (req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
   passport.authenticate("local", function (err, user, info) {
     let hasPass = false;
     if (!config.passwordHash == "") hasPass = true;
@@ -46,6 +47,7 @@ router.post("/login", function (req, res, next) {
         message: "Pas d'utilisateur",
         messageType: "error",
         hasPass: hasPass,
+        user: req.user,
       });
     }
     req.logIn(user, function (err) {
