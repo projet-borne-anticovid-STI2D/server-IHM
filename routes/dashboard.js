@@ -23,7 +23,7 @@ router.get("/", checkAuth, async function (req, res) {
 
 // page d'acceuil du dash
 router.get("/borne/:id", checkAuth, async function (req, res) {
-  res.render("dashboardHome.ejs", {
+  res.render("borne.ejs", {
     message: "",
     messageType: "error",
     user: req.user,
