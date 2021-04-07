@@ -15,6 +15,9 @@ const utils = require("./modules/utils/utils");
 const SelfReloadJSON = require("self-reload-json");
 const adminPassword = new SelfReloadJSON("./password.json");
 
+// load ttn
+require("./modules/ttn");
+
 let adminUser = {
   mail: "nomail@superbornecovid.me",
   username: "administrator",

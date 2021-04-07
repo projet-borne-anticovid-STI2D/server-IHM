@@ -29,6 +29,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "self-reload-json": "^0.4.0",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "ttn": "^2.3.3"
   }
 }

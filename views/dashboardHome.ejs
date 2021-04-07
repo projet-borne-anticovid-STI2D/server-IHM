@@ -16,6 +16,7 @@
     <table style="width:70%; margin-left: 15%;">
         <tr>
           <th>ID</th>
+          <th>ID lora</th>
           <th>Identifiant</th>
           <th>Dernière réception</th>
           <th></th>
@@ -23,6 +24,7 @@
         <% for(let borne of bornes ) { %> 
         
             <tr>
+                <td><%= borne.id  %></td>
                 <td><%= borne.lora_ID  %></td>
                 <td><%= borne.nickname  %></td>
                 <td>none</td>
